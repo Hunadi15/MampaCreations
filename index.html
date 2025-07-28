@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mampa Creations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #374151; /* text-gray-800 */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Dark Mode Styles */
+        html.dark body {
+            background-color: #111827; /* dark:bg-gray-900 */
+            color: #f3f4f6; /* dark:text-gray-100 */
+        }
+
+        html.dark .bg-white {
+            background-color: #1f2937; /* dark:bg-gray-800 */
+        }
+
+        html.dark .text-gray-800 {
+            color: #e5e7eb; /* dark:text-gray-200 */
+        }
+
+        html.dark .text-gray-900 {
+            color: #f3f4f6; /* dark:text-gray-100 */
+        }
+
+        html.dark .text-gray-700 {
+            color: #d1d5db; /* dark:text-gray-300 */
+        }
+
+        html.dark .border-gray-300 {
+            border-color: #4b5563; /* dark:border-gray-600 */
+        }
+
+        html.dark .focus\:ring-indigo-500:focus {
+            box-shadow: 0 0 0 2px #6366f1; /* dark:focus:ring-indigo-400 */
+        }
+
+        html.dark .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        html.dark .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+        }
+
+        html.dark .shadow-xl {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        html.dark .bg-gray-50,
+        html.dark .bg-gray-100 {
+            background-color: #1f2937; /* dark:bg-gray-800 */
+        }
+
+        html.dark .bg-indigo-50 {
+            background-color: #3730a3; /* dark:bg-indigo-900 */
+        }
+
+        html.dark .text-indigo-800 {
+            color: #c7d2fe; /* dark:text-indigo-200 */
+        }
+
+        html.dark .text-indigo-700 {
+            color: #a5b4fc; /* dark:text-indigo-300 */
+        }
+
+        html.dark .bg-indigo-700 {
+            background-color: #4338ca; /* dark:bg-indigo-800 */
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 10;
+            transition: background-color 0.3s ease;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4f46e5;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+        }
+
+        header ul {
+            display: none; /* Hidden by default for mobile */
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        header ul li {
+            margin-left: 1.5rem;
+        }
+
+        header ul li a {
+            color: #4b5563; /* text-gray-700 */
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        html.dark header ul li a {
+            color: #d1d5db; /* dark:text-gray-300 */
+        }
+
+        header ul li a:hover {
+            color: #4f46e5; /* hover:text-indigo-600 */
+            background-color: #e0e7ff; /* hover:bg-indigo-50 */
+        }
+
+        html.dark header ul li a:hover {
+            color: #818cf8; /* dark:hover:text-indigo-400 */
+            background-color: #3730a3; /* dark:hover:bg-indigo-700 */
+        }
+
+        .nav-link.active {
+            font-weight: 600;
+            color: #4F46E5; /* Indigo 600 */
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: #f3f4f6; /* hover:bg-gray-100 */
+        }
+
+        html.dark .theme-toggle-btn:hover {
+            background-color: #374151; /* dark:hover:bg-gray-700 */
+        }
+
+        .theme-toggle-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #4b5563; /* text-gray-700 */
+        }
+
+        html.dark .theme-toggle-btn svg {
+            color: #d1d5db; /* dark:text-gray-300 */
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-button {
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-menu-button button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-menu-button button:hover {
+            background-color: #f3f4f6;
+        }
+
+        html.dark .mobile-menu-button button:hover {
+            background-color: #374151;
+        }
+
+        .mobile-menu-button svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #4b5563;
+        }
+
+        html.dark .mobile-menu-button svg {
+            color: #d1d5db;
+        }
+
+        #mobile-menu {
+            display: none; /* Hidden by default */
+            position: fixed;
+            inset: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px); /* Optional: add a slight blur for overlay effect */
+            z-index: 20;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        html.dark #mobile-menu {
+            background-color: rgba(17, 24, 39, 0.95);
+        }
+
+        #mobile-menu .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease;
+        }
+
+        #mobile-menu .close-button:hover {
+            background-color: #f3f4f6;
+        }
+
+        html.dark #mobile-menu .close-button:hover {
+            background-color: #374151;
+        }
+
+        #mobile-menu .close-button svg {
+            width: 2rem;
+            height: 2rem;
+            color: #4b5563;
+        }
+
+        html.dark #mobile-menu .close-button svg {
+            color: #d1d5db;
+        }
+
+        #mobile-menu ul {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 1.25rem;
+            gap: 1.5rem;
+        }
+
+        #mobile-menu ul li a {
+            color: #4b5563;
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            display: block;
+            text-align: center;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        html.dark #mobile-menu ul li a {
+            color: #d1d5db;
+        }
+
+        #mobile-menu ul li a:hover {
+            color: #4f46e5;
+            background-color: #e0e7ff;
+        }
+
+        html.dark #mobile-menu ul li a:hover {
+            color: #818cf8;
+            background-color: #3730a3;
+        }
+
+        /* Main Content Padding */
+        main {
+            padding-top: 5rem; /* Adjust based on header height */
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            background: linear-gradient(to right, #4f46e5, #8b5cf6); /* from-indigo-600 to-purple-700 */
+            color: #ffffff;
+            padding: 5rem 0;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            animation: fadeInTop 1s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2.5rem;
+            max-width: 48rem; /* max-w-3xl */
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            animation: fadeInTop 1s ease-out 0.2s both;
+        }
+
+        .hero-section .cta-button {
+            background-color: #ffffff;
+            color: #4338ca; /* text-indigo-700 */
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* full rounded */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInTop 1s ease-out 0.4s both;
+        }
+
+        .hero-section .cta-button:hover {
+            background-color: #e0e7ff; /* hover:bg-indigo-50 */
+            color: #3730a3; /* hover:text-indigo-800 */
+            transform: scale(1.05);
+        }
+
+        /* Abstract background shapes */
+        .hero-section .abstract-shapes {
+            position: absolute;
+            inset: 0;
+            opacity: 0.2;
+        }
+
+        .hero-section .abstract-shapes svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-section .abstract-shapes circle.text-indigo-500 {
+            fill: #6366f1;
+        }
+        .hero-section .abstract-shapes rect.text-purple-500 {
+            fill: #a855f7;
+        }
+        .hero-section .abstract-shapes polygon.text-indigo-400 {
+            fill: #818cf8;
+        }
+        .hero-section .abstract-shapes path.text-purple-600 {
+            fill: #7c3aed;
+        }
+
+        /* Sections General */
+        section {
+            padding: 4rem 0;
+            margin: 2rem 1rem;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 72rem; /* max-w-6xl */
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f3f4f6; /* bg-gray-100 */
+        }
+
+        html.dark section {
+            background-color: #1f2937; /* dark:bg-gray-800 */
+        }
+
+        html.dark section:nth-of-type(even) {
+            background-color: #1f2937; /* dark:bg-gray-800 */
+        }
+
+        section h2 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            color: #111827; /* text-gray-900 */
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        html.dark section h2 {
+            color: #f3f4f6; /* dark:text-gray-100 */
+        }
+
+        /* About Section */
+        #about .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        #about .text-content {
+            text-align: center;
+        }
+
+        #about p {
+            font-size: 1.125rem;
+            color: #4b5563; /* text-gray-700 */
+            line-height: 1.75;
+            margin-bottom: 1rem;
+        }
+
+        html.dark #about p {
+            color: #d1d5db; /* dark:text-gray-300 */
+        }
+
+        /* Services Section */
+        #services .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) { /* md */
+            #services .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) { /* lg */
+            #services .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        #services .service-card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            text-align: center;
+        }
+
+        html.dark #services .service-card {
+            background-color: #374151; /* dark:bg-gray-700 */
+        }
+
+        #services .service-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-0.25rem);
+        }
+
+        #services .service-card .icon {
+            color: #4f46e5; /* text-indigo-600 */
+            margin-bottom: 1rem;
+        }
+
+        html.dark #services .service-card .icon {
+            color: #818cf8; /* dark:text-indigo-400 */
+        }
+
+        #services .service-card .icon svg {
+            width: 3rem;
+            height: 3rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #services .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827; /* text-gray-900 */
+            margin-bottom: 1rem;
+        }
+
+        html.dark #services .service-card h3 {
+            color: #f3f4f6; /* dark:text-gray-100 */
+        }
+
+        #services .service-card p {
+            color: #4b5563; /* text-gray-700 */
+        }
+
+        html.dark #services .service-card p {
+            color: #d1d5db; /* dark:text-gray-300 */
+        }
+
+        /* Portfolio Section */
+        #portfolio .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) { /* md */
+            #portfolio .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) { /* lg */
+            #portfolio .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        #portfolio .portfolio-item {
+            background-color: #f9fafb; /* bg-gray-50 */
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        html.dark #portfolio .portfolio-item {
+            background-color: #374151; /* dark:bg-gray-700 */
+        }
+
+        #portfolio .portfolio-item img {
+            width: 100%;
+            height: 12rem; /* h-48 */
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        #portfolio .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        #portfolio .portfolio-item .content {
+            padding: 1.5rem;
+        }
+
+        #portfolio .portfolio-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827; /* text-gray-900 */
+            margin-bottom: 0.5rem;
+        }
+
+        html.dark #portfolio .portfolio-item h3 {
+            color: #f3f4f6; /* dark:text-gray-100 */
+        }
+
+        #portfolio .portfolio-item p {
+            color: #4b5563; /* text-gray-700 */
+        }
+
+        html.dark #portfolio .portfolio-item p {
+            color: #d1d5db; /* dark:text-gray-300 */
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            background-color: #4338ca; /* bg-indigo-700 */
+            color: #ffffff;
+            padding: 4rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin: 2rem 1rem;
+            max-width: 72rem;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        html.dark .cta-section {
+            background-color: #3730a3; /* dark:bg-indigo-800 */
+        }
+
+        .cta-section h2 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: inherit; /* Inherit white color */
+        }
+
+        .cta-section p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 42rem; /* max-w-2xl */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .cta-button {
+            background-color: #ffffff;
+            color: #4338ca; /* text-indigo-700 */
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-section .cta-button:hover {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        #contact .content-wrapper {
+            text-align: center;
+        }
+
+        #contact p {
+            font-size: 1.125rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+            max-width: 36rem; /* max-w-xl */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        html.dark #contact p {
+            color: #d1d5db;
+        }
+
+        #contact form {
+            max-width: 36rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        #contact form label {
+            display: none; /* sr-only */
+        }
+
+        #contact form input,
+        #contact form select,
+        #contact form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #d1d5db; /* border-gray-300 */
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+            background-color: #ffffff;
+            color: #374151; /* text-gray-800 */
+        }
+
+        html.dark #contact form input,
+        html.dark #contact form select,
+        html.dark #contact form textarea {
+            border-color: #4b5563; /* dark:border-gray-600 */
+            background-color: #374151; /* dark:bg-gray-700 */
+            color: #e5e7eb; /* dark:text-gray-200 */
+        }
+
+        #contact form input:focus,
+        #contact form select:focus,
+        #contact form textarea:focus {
+            outline: none;
+            border-color: transparent;
+            box-shadow: 0 0 0 2px #6366f1; /* focus:ring-2 focus:ring-indigo-500 */
+        }
+
+        #contact form button[type="submit"] {
+            width: 100%;
+            background-color: #4f46e5; /* bg-indigo-600 */
+            color: #ffffff;
+            font-weight: bold;
+            padding: 1rem 1.5rem;
+            border-radius: 0.375rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        #contact form button[type="submit"]:hover {
+            background-color: #4338ca; /* hover:bg-indigo-700 */
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1f2937; /* bg-gray-800 */
+            color: #ffffff;
+            padding: 2rem 0;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        html.dark footer {
+            background-color: #111827; /* dark:bg-gray-900 */
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 1.5rem; /* text-2xl */
+            margin-top: 1rem;
+        }
+
+        @media (min-width: 768px) { /* md */
+            footer .social-icons {
+                font-size: 1.875rem; /* text-3xl */
+            }
+        }
+
+        footer .social-icons a {
+            color: inherit;
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+
+        footer .social-icons a:hover {
+            color: #10b981; /* green-500 for whatsapp, blue-400 for phone, red-400 for email, blue-600 for linkedin */
+        }
+
+        /* Animations */
+        @keyframes fadeInTop {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation-fill-mode: both;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        /* Responsive Adjustments (md breakpoint) */
+        @media (min-width: 768px) {
+            header ul {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: none;
+            }
+
+            .hero-section {
+                padding: 8rem 0;
+            }
+
+            .hero-section h1 {
+                font-size: 3.75rem;
+            }
+
+            .hero-section p {
+                font-size: 1.25rem;
+            }
+
+            #about .content-wrapper {
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Mampa Creations</a>
+            <ul>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                
+                <li>
+                    <button id="theme-toggle" class="theme-toggle-btn">
+                        <svg id="sun-icon" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M2 12h1m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+            <div class="mobile-menu-button md:hidden">
+                <button id="theme-toggle-mobile" class="theme-toggle-btn mr-2">
+                    <svg id="sun-icon-mobile" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M2 12h1m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg id="moon-icon-mobile" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+                <button id="mobile-menu-button">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu">
+            <button id="close-mobile-menu" class="close-button">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <ul>
+                <li><a href="#home" class="mobile-nav-link">Home</a></li>
+                <li><a href="#about" class="mobile-nav-link">About</a></li>
+                <li><a href="#services" class="mobile-nav-link">Services</a></li>
+                <li><a href="#portfolio" class="mobile-nav-link">Portfolio</a></li>
+                <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container relative z-10">
+                <h1 class="animate-fade-in-up">
+                    Crafting Digital Experiences & Visual Stories
+                </h1>
+                <p class="animate-fade-in-up delay-200">
+                    <strong>Mampa Creations</strong> we don't just design; we create digital and visual solutions. Specializing in stunning websites and impactful posters, we ensure your brand captures maximum attention, effectively delivering your message and driving meaningful engagement.
+                </p>
+                
+</div>
+            </div>
+            <div class="abstract-shapes">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <circle cx="20" cy="80" r="15" fill="currentColor" class="text-indigo-500"></circle>
+                    <rect x="70" y="10" width="20" height="20" rx="5" ry="5" fill="currentColor" class="text-purple-500"></rect>
+                    <polygon points="50,0 60,20 40,20" fill="currentColor" class="text-indigo-400"></polygon>
+                    <path d="M 0 50 C 20 70, 80 30, 100 50 L 100 100 L 0 100 Z" fill="currentColor" class="text-purple-600"></path>
+                </svg>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container content-wrapper">
+                <div class="image-placeholder">
+                    </div>
+                <div class="text-content">
+                    <h2>About US</h2>
+                    <p>
+                        I'm a passionate designer dedicated to bringing ideas to life through compelling visuals. With a keen eye for detail and a deep understanding of user experience, I create designs that are not only aesthetically pleasing but also highly functional and effective.
+                        My journey in design began with a fascination for how visual elements can influence perception and emotion. I constantly explore new trends and technologies to ensure my work is always fresh, innovative, and impactful. Let's build something amazing together!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container text-center">
+                <h2>Our Services</h2>
+                <div class="grid-container">
+                    <div class="service-card">
+                        <div class="icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1.25-3M15 10V5l-1-1H9l-1 1v5m4 0h.01M12 12h4.01M16 16h.01"></path>
+                            </svg>
+                        </div>
+                        <h3>Website Design & Development</h3>
+                        <p>
+                            From responsive layouts to intuitive user interfaces, I create modern, engaging, and high-performing websites tailored to your brand.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3>Poster & Print Design</h3>
+                        <p>
+                            Crafting eye-catching posters, flyers, and print materials that effectively communicate your message and leave a lasting impression.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3>Branding & Visual Identity</h3>
+                        <p>
+                            Developing cohesive brand identities, including logos, color palettes, and typography, to ensure a strong and memorable presence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container text-center">
+                <h2> Portfolio</h2>
+                <div class="grid-container">
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/600x400/D1FAE5/065F46?text=Website+Design" alt="Website Design33">
+                        <div class="content">
+                            <h3> Web Services</h3>
+                            <p>Innovation in Every Click, Powering Your Online Vision, and Leading the Way in Web Solutions. modern and responsive webside with enhanced user friendly<br><strong>Custom Website<br>Responsive Development<br>E-Commerce </strong></p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/600x400/DBEAFE/1E40AF?text=Poster+Campaign" alt="Poster CampaignS">
+                        <div class="content">
+                            <h3>Event Poster Series</h3>
+                            <p>A vibrant and engaging series of posters for:<br><strong>music festival<br>Weddings<br>Birthday parties<br>Funerals<br>etc</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="https://placehold.co/600x400/ECFDF5/047857?text=Brochure+Design" alt="Brochure Design">
+                        <div class="content">
+                            <h3>Company Brochure</h3>
+                            <p>A sleek and informative brochure for a technology startup<br><strong>Fashion<br>Travel<br>Real Estate<br>etc</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container text-center">
+                <h2>Ready to start your next project?</h2>
+                <p>
+                    Let's collaborate and bring your vision to life with exceptional design.
+                </p>
+                <a href="#contact" class="cta-button">
+                    Get in Touch
+                </a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container content-wrapper">
+                <h2>Contact Us</h2>
+                <p>
+                   Have a project in mind or just want to say hello? We're always eager to discuss new ideas, explore creative opportunities, and help bring your vision to life. Feel free to connect with us!
+                </p>
+                <form id="contact-form">
+                    <div>
+                        <label for="name" class="sr-only">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="sr-only">Phone</label>
+                        <input type="text" id="phone" name="phone" placeholder="Your phone" required>
+                    </div>
+                    <div>
+                        <label for="serviceSelect" class="sr-only">Service Interested In</label>
+                        <select id="serviceSelect" name="serviceInterestedIn" required>
+                            <option value="">-- Select Service Interested In --</option>
+                            <option value="website-design">Website Design & Development</option>
+                            <option value="graphic-design-posters">Posters & Print Design</option>
+                            <option value="branding-identity">Branding & Identity</option>
+                            <option value="other">Other Inquiry</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div>
+                        <label for="message" class="sr-only">Message</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+                    </div>
+                    <div>
+                        <button type="submit">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mampa Creations. All rights reserved.</p>
+            <p>designed by Hunadi Mampa</p>
+            
+            <div class="social-icons">
+                <a href="https://wa.me/27720163796" target="_blank" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                
+                <a href="tel:+27720163796" aria-label="Call">
+                    <i class="fas fa-phone"></i>
+                </a>
+
+                <a href="mailto:MampaCreations@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/hunadi-mampa-1b20522b7/" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, #view-work-button');
+        document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+    const contactForm = document.getElementById('contact-form');
+    // Ensure you add <p id="form-message"></p> inside your contact form or nearby in your HTML
+    const formMessage = document.getElementById('form-message');
+
+    // Dark Mode Elements
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+    const sunIconMobile = document.getElementById('sun-icon-mobile');
+    const moonIconMobile = document.getElementById('moon-icon-mobile');
+
+    // Function to set the theme
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            localStorage.theme = 'dark';
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+            sunIconMobile.classList.remove('hidden');
+            moonIconMobile.classList.add('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.theme = 'light';
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+            sunIconMobile.classList.add('hidden');
+            moonIconMobile.classList.remove('hidden');
+        }
+    }
+
+    // On page load, check for saved theme preference or system preference
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
+
+    // Event listener for desktop theme toggle
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        setTheme(currentTheme === 'light' ? 'dark' : 'light');
+    });
+
+    // Event listener for mobile theme toggle
+    themeToggleBtnMobile.addEventListener('click', () => {
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        setTheme(currentTheme === 'light' ? 'dark' : 'light');
+    });
+
+    // Smooth scrolling for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                // Offset for fixed header
+                const offsetTop = targetSection.offsetTop - document.querySelector('header').offsetHeight;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Close mobile menu if open
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    // Mobile menu toggle
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.remove('hidden');
+    });
+
+    closeMobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+    });
+
+    // --- EmailJS Integration for Contact Form ---
+    const serviceSelect = document.getElementById('serviceSelect');
+
+    // Handle form submission using EmailJS
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+
+            // Display "Sending message..."
+            if (formMessage) {
+                formMessage.classList.remove('text-green-600', 'text-red-600', 'dark:text-gray-100');
+                formMessage.classList.add('text-gray-700', 'dark:text-gray-300'); // Set initial text color
+                formMessage.textContent = 'Sending message...';
+            }
+
+            // Get form values for EmailJS
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                title: document.getElementById('serviceSelect').value,
+                message: document.getElementById('message').value
+            };
+
+            emailjs.init("biVoV0ngVLFgW30Fj");
+            emailjs.send("service_bo9uwlm", "template_6m2yxma", formData) // Pass formData here
+                .then((response) => {
+                    alert('EmailJS Success ');
+                    if (formMessage) {
+                        formMessage.classList.remove('text-gray-700', 'dark:text-gray-300', 'text-red-600');
+                        formMessage.classList.add('text-green-600', 'font-medium'); // Added font-medium for emphasis
+                        formMessage.textContent = 'Message sent successfully! Mampa Creations will get back to you soon.';
+                    }
+                    contactForm.reset(); // Clear the form
+                })
+                .catch((error) => {
+                    alert('EmailJS Failed:', error);
+                    if (formMessage) {
+                        formMessage.classList.remove('text-gray-700', 'dark:text-gray-300', 'text-green-600');
+                        formMessage.classList.add('text-red-600', 'font-medium'); // Added font-medium for emphasis
+                        formMessage.textContent = 'Failed to send message. Please try again later.';
+                    }
+                });
+        });
+    }
+});
+</script>
+</body>
+</html>
