@@ -1101,25 +1101,8 @@
     });
 
     // Smooth scrolling for navigation links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                // Offset for fixed header
-                const offsetTop = targetSection.offsetTop - document.querySelector('header').offsetHeight;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-
-            // Close mobile menu if open
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
     });
 
     // Mobile menu toggle
@@ -1158,7 +1141,7 @@
             emailjs.init("biVoV0ngVLFgW30Fj");
             emailjs.send("service_bo9uwlm", "template_6m2yxma", formData) // Pass formData here
                 .then((response) => {
-                    alert('EmailJS Success ');
+                    alert('Massege sent successfully');
                     if (formMessage) {
                         formMessage.classList.remove('text-gray-700', 'dark:text-gray-300', 'text-red-600');
                         formMessage.classList.add('text-green-600', 'font-medium'); // Added font-medium for emphasis
@@ -1167,7 +1150,7 @@
                     contactForm.reset(); // Clear the form
                 })
                 .catch((error) => {
-                    alert('EmailJS Failed:', error);
+                    alert("Massege Failed:");
                     if (formMessage) {
                         formMessage.classList.remove('text-gray-700', 'dark:text-gray-300', 'text-green-600');
                         formMessage.classList.add('text-red-600', 'font-medium'); // Added font-medium for emphasis
